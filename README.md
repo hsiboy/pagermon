@@ -67,10 +67,19 @@ These instructions will get you a copy of the project up and running on your loc
 2) Launch the app from the Terminal:
 
 ```
-    $ sudo apt-get install npm sqlite3
-    $ npm install npm@latest -g
-    $ npm install pm2 -g
+    $ curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+    $ sudo apt-get install nodejs sqlite3 libsqlite3-dev gcc g++ make build-essential
+    $ sudo npm install npm@latest -g
+    $ sudo npm install pm2 -g
+    $ git clone https://github.com/hsiboy/pagermon
+    $ cd pagermon/server
+    $ sudo dd if=/dev/zero of=swapfile bs=1M count=512
+    $ sudo mkswap swapfile
+    $ sudo swapon swapfile
     $ npm install
+    $ npm install --production --sqlite=/usr/bin sqlite3
+    $ sudo swapoff swapfile
+    $ sudo rm swapfile
     $ export NODE_ENV=production
     $ pm2 start server/process.json
 ```
